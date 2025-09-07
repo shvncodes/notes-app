@@ -4,12 +4,16 @@ const pageNameInput = document.querySelector("#pageNameInput");
 const deleteBtn = document.querySelector("#deleteBtn");
 const saveBtn = document.querySelector("#saveBtn");
 const pageContent = document.querySelector("#content");
+const rightPage = document.querySelector("#sectionB");
+const emptyState = document.querySelector("#emptyState");
 
 let allPages = [];
 let currentPageId = null;
 
 function deletePage() {
-    if(allPages) return;
+    if(allPages.length === 0) {
+        return;
+    }
     const isConfirm = confirm("Are you sure you want to delete this page?");
     if(!isConfirm) {
         return;
@@ -28,8 +32,12 @@ function deletePage() {
             allFiles.children[i].remove();
         }
     }
-    pageName.value = "";
+    pageNameInput.value = "";
     pageContent.value = "";
+    if(allPages.length < 1) {
+        rightPage.style.display = "none";
+        emptyState.style.display = "flex";
+    }
 }
 
 deleteBtn.addEventListener("click", deletePage);
@@ -63,7 +71,7 @@ function updateCurrentPageState(page) {
         return;
     }
     currentPageId = page.id;
-    pageName.value = page.title;
+    pageNameInput.value = page.title;
     pageContent.value = page.content;
 
     for(let i = 0; i < allFiles.childElementCount; i++) {
@@ -80,6 +88,9 @@ function createNewPage() {
     if(!pageTitle.trim()) {
         return;
     }
+
+    rightPage.style.display = "flex";
+    emptyState.style.display = "none";
 
     const pageId = Date.now() + Math.random().toString(16).slice(2);
     const newPage = document.createElement("div");

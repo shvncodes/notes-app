@@ -5,11 +5,13 @@
 }
 
 #mainBox{
+    height: 100vh;
     width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
     gap: 20px;
+    background-color: #efeeee;
 }
 
 #sectionA {
@@ -20,7 +22,7 @@
     gap: 15px;
     border-radius: 10px;
     padding: 10px;
-    background-color: pink;
+    background-color: white;
 }
 
 #addBtn {
@@ -37,6 +39,7 @@
 }
 
 #allFiles {
+    height: 100vh;
     width: 100%;
     background-color: #f8f8f8;
     display: flex;
@@ -53,12 +56,11 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 15px;
     padding: 10px;
     border-radius: 10px;
-    background-color: pink;
+    background-color: white;
 }
 
 #header {
@@ -79,7 +81,7 @@
 
 #deleteBtn {
     width: 20%;
-    padding: 5px;
+    padding: 7px 5px;
     font-size: 16px;
     border: 0;
     border-radius: 10px;
@@ -89,7 +91,7 @@
 
 #saveBtn {
     width: 20%;
-    padding: 5px;
+    padding: 7px 5px;
     font-size: 16px;
     border: 0;
     border-radius: 10px;
@@ -99,12 +101,16 @@
 
 #page {
     width: 100%;
+    height: 100%;
     border-radius: 10px;
 }
 
 #content {
     width: 100%;
+    height: 100%;
     padding: 15px 10px;
     border: 1px solid rgb(234, 232, 232);
     border-radius: 10px;
+    font-size: 18px;
+    resize: none;
 }

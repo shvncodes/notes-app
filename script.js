@@ -32,11 +32,12 @@ function deletePage() {
             allFiles.children[i].remove();
         }
     }
-    pageNameInput.value = "";
-    pageContent.value = "";
+
     if(allPages.length < 1) {
         rightPage.style.display = "none";
         emptyState.style.display = "flex";
+    } else {
+        updateCurrentPageState(allPages[0]);
     }
 }
 

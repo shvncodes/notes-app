@@ -71,10 +71,25 @@
     gap: 10px;
 }
 
-#pageName {
-    width: 60%;
+.pageNameSection {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.pageTitle {
+    width: 20%;
+    font-size: 18px;
     padding: 5px;
-    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pageNameInput {
+    width: 80%;
+    padding: 5px;
+    font-size: 20px;
     border: 1px solid rgb(234, 232, 232);
     border-radius: 10px;
 }

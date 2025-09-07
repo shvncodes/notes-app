@@ -1,6 +1,6 @@
 const addNewPageBtn = document.querySelector("#addBtn");
 const allFiles = document.querySelector("#allFiles");
-const pageNameInput = document.querySelector("#pageName");
+const pageNameInput = document.querySelector("#pageNameInput");
 const deleteBtn = document.querySelector("#deleteBtn");
 const saveBtn = document.querySelector("#saveBtn");
 const pageContent = document.querySelector("#content");
@@ -9,6 +9,7 @@ let allPages = [];
 let currentPageId = null;
 
 function deletePage() {
+    if(allPages) return;
     const isConfirm = confirm("Are you sure you want to delete this page?");
     if(!isConfirm) {
         return;
@@ -34,6 +35,8 @@ function deletePage() {
 deleteBtn.addEventListener("click", deletePage);
 
 function savePageContent() {
+    if(allFiles.childElementCount < 1) return;
+
     const content = pageContent.value;
     const pageTitle = pageNameInput.value;
     for(let i = 0; i < allPages.length; i++) {
@@ -77,6 +80,7 @@ function createNewPage() {
     if(!pageTitle.trim()) {
         return;
     }
+
     const pageId = Date.now() + Math.random().toString(16).slice(2);
     const newPage = document.createElement("div");
     newPage.className = 'newFile';

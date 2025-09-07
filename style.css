@@ -34,8 +34,9 @@
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    padding: 5px;
+    padding: 8px;
     border: 0;
+    cursor: pointer;
 }
 
 #allFiles {
@@ -44,7 +45,6 @@
     background-color: #f8f8f8;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 10px;
     border: 1px solid rgb(234, 232, 232);
@@ -87,6 +87,7 @@
     border-radius: 10px;
     background-color: red;
     color: white;
+    cursor: pointer;
 }
 
 #saveBtn {
@@ -97,6 +98,7 @@
     border-radius: 10px;
     background-color: green;
     color: white;
+    cursor: pointer;
 }
 
 #page {
@@ -113,4 +115,16 @@
     border-radius: 10px;
     font-size: 18px;
     resize: none;
+}
+
+.newFile {
+    cursor: pointer;
+    background-color: #ededed;
+    padding: 8px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.selectedPage {
+    background-color: lightblue;
 }

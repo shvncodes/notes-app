@@ -38,9 +38,13 @@
     border: 0;
     cursor: pointer;
 }
+#addBtn:hover {
+    background-color: #357fd1;;
+}
 
 #allFiles {
-    height: 100vh;
+    flex: 1;
+    overflow-y: auto;
     width: 100%;
     background-color: #f8f8f8;
     display: flex;
@@ -70,7 +74,7 @@
     align-items: center;
     text-align: center;
     font-size: 25px;
-    opacity: 50%;
+    opacity: 0.5;
     padding: 10px;
     border-radius: 10px;
     background-color: white;
@@ -107,26 +111,30 @@
     border-radius: 10px;
 }
 
-#deleteBtn {
+.btn {
     width: 20%;
     padding: 7px 5px;
     font-size: 16px;
     border: 0;
     border-radius: 10px;
-    background-color: red;
     color: white;
     cursor: pointer;
 }
 
+#deleteBtn {
+    background-color: #e74c3c;
+}
+
 #saveBtn {
-    width: 20%;
-    padding: 7px 5px;
-    font-size: 16px;
-    border: 0;
-    border-radius: 10px;
-    background-color: green;
-    color: white;
-    cursor: pointer;
+    background-color: #4caf50;
+}
+
+#deleteBtn:hover{
+    background-color: #f03621;
+}
+
+#saveBtn:hover{
+    background-color: #36993a;
 }
 
 #page {

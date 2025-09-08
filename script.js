@@ -70,7 +70,8 @@ function savePageContent() {
     const content = pageContent.value;
     const pageTitle = pageNameInput.value;
     if(!pageTitle.trim()) {
-        alert("Please enter page title")    
+        alert("Please enter page title");
+        return;  
     }
 
     for(let i = 0; i < allPages.length; i++) {
@@ -119,9 +120,9 @@ function createAndInsertNode(page) {
     const newPageNode = document.createElement("div");
     newPageNode.className = 'newFile';
     newPageNode.setAttribute("data-pageId", page.id);
-    newPageNode.onclick = () => {
+    newPageNode.addEventListener("click", ()=> {
         updateCurrentPageState(page);
-    }
+    })
     newPageNode.textContent = page.title;
     allFiles.prepend(newPageNode);
 }

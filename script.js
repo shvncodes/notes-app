@@ -1,12 +1,12 @@
-const addNewPageBtn = document.querySelector("#addBtn");
-const allFiles = document.querySelector("#allFiles");
-const pageNameInput = document.querySelector("#pageNameInput");
+const addPageBtn = document.querySelector("#addBtn");
+const pagesList = document.querySelector("#pagesList");
+const pageTitleInput = document.querySelector("#pageTitleInput");
 const deleteBtn = document.querySelector("#deleteBtn");
 const saveBtn = document.querySelector("#saveBtn");
-const pageContent = document.querySelector("#content");
+const pageContentInput = document.querySelector("#content");
 const rightPage = document.querySelector("#sectionB");
-const emptyState = document.querySelector("#emptyState");
-const showToast  = document.querySelector("#toast");
+const emptyStateSection  = document.querySelector("#emptyState");
+const toast  = document.querySelector("#toast");
 const LOCAL_STORAGE_KEY = "all_pages";
 
 let allPages = [];
@@ -22,7 +22,7 @@ if(pagesInLS.length > 0) {
     }
     updateCurrentPageState(allPages[allPages.length-1]);
     rightPage.style.display = "flex";
-    emptyState.style.display = "none";
+    emptyStateSection .style.display = "none";
 }
 
 function saveInLocalStorage() {
@@ -48,15 +48,15 @@ function deletePage() {
 
     saveInLocalStorage();
 
-    for(let i = 0; i < allFiles.childElementCount; i++) {
-        if(allFiles.children[i].getAttribute("data-pageId") === currentPageId) {
-            allFiles.children[i].remove();
+    for(let i = 0; i < pagesList.childElementCount; i++) {
+        if(pagesList.children[i].getAttribute("data-pageId") === currentPageId) {
+            pagesList.children[i].remove();
         }
     }
 
     if(allPages.length < 1) {
         rightPage.style.display = "none";
-        emptyState.style.display = "flex";
+        emptyStateSection .style.display = "flex";
     } else {
         updateCurrentPageState(allPages[allPages.length-1]);
     }
@@ -65,10 +65,10 @@ function deletePage() {
 deleteBtn.addEventListener("click", deletePage);
 
 function savePageContent() {
-    if(allFiles.childElementCount < 1) return;
+    if(pagesList.childElementCount < 1) return;
 
-    const content = pageContent.value;
-    const pageTitle = pageNameInput.value;
+    const content = pageContentInput.value;
+    const pageTitle = pageTitleInput.value;
     if(!pageTitle.trim()) {
         alert("Please enter page title");
         return;  
@@ -81,16 +81,16 @@ function savePageContent() {
         }
     }
 
-    for(let i = 0; i < allFiles.childElementCount; i++) {
-        const node = allFiles.children[i];
+    for(let i = 0; i < pagesList.childElementCount; i++) {
+        const node = pagesList.children[i];
         if(node.getAttribute("data-pageId") === currentPageId){
             node.textContent = pageTitle;
         }
     }
 
-    showToast.style.display = "block";
+    toast.style.display = "block";
     setTimeout(() => {
-        showToast.style.display = "none";
+        toast.style.display = "none";
     }, 1000);
     
     saveInLocalStorage();
@@ -104,14 +104,14 @@ function updateCurrentPageState(page) {
         return;
     }
     currentPageId = page.id;
-    pageNameInput.value = page.title;
-    pageContent.value = page.content;
+    pageTitleInput.value = page.title;
+    pageContentInput.value = page.content;
 
-    for(let i = 0; i < allFiles.childElementCount; i++) {
-        if(allFiles.children[i].getAttribute("data-pageId") === currentPageId) {
-            allFiles.children[i].classList.add("selectedPage");
+    for(let i = 0; i < pagesList.childElementCount; i++) {
+        if(pagesList.children[i].getAttribute("data-pageId") === currentPageId) {
+            pagesList.children[i].classList.add("selectedPage");
         } else {
-            allFiles.children[i].classList.remove("selectedPage");
+            pagesList.children[i].classList.remove("selectedPage");
         }
     }
 }
@@ -120,11 +120,8 @@ function createAndInsertNode(page) {
     const newPageNode = document.createElement("div");
     newPageNode.className = 'newFile';
     newPageNode.setAttribute("data-pageId", page.id);
-    newPageNode.addEventListener("click", ()=> {
-        updateCurrentPageState(page);
-    })
     newPageNode.textContent = page.title;
-    allFiles.prepend(newPageNode);
+    pagesList.prepend(newPageNode);
 }
 
 function createNewPage() {
@@ -134,7 +131,7 @@ function createNewPage() {
     }
 
     rightPage.style.display = "flex";
-    emptyState.style.display = "none";
+    emptyStateSection .style.display = "none";
 
     const pageId = Date.now() + Math.random().toString(16).slice(2);
     const page = {
@@ -148,4 +145,15 @@ function createNewPage() {
     saveInLocalStorage();
 }
 
-addNewPageBtn.addEventListener("click", createNewPage);
+addPageBtn.addEventListener("click", createNewPage);
+
+pagesList.addEventListener("click", (e) => {
+    const node = e.target;
+    if(node.classList.contains("newFile")) {
+        const pageId = node.getAttribute("data-pageId");
+        const page = allPages.find((p) => {
+            return p.id === pageId;
+        })
+        updateCurrentPageState(page);
+    }
+})
